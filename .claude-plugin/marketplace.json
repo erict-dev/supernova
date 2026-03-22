@@ -1,0 +1,13 @@
+{
+  "name": "supernova",
+  "owner": {
+    "name": "erict-dev"
+  },
+  "plugins": [
+    {
+      "name": "supernova",
+      "source": ".",
+      "description": "Opinionated development workflow for Claude Code: brainstorm → design doc → implementation plan → execute with subagents → review → Playwright E2E testing → ship"
+    }
+  ]
+}
