@@ -71,7 +71,7 @@ Task tool (general-purpose):
 
     ## Iteration Awareness
 
-    {{#if ITERATION > 1}}
+    [IF ITERATION > 1 — include this block. Otherwise omit it.]
     **This is iteration {{ITERATION}}.** Previous fix attempts did not fully resolve the issues.
 
     Before starting:
@@ -79,7 +79,7 @@ Task tool (general-purpose):
     - For persistent errors: the obvious fix already failed. Look deeper. Re-read the surrounding code, check for assumptions that don't hold, trace the data flow end-to-end
     - For new errors: previous fixes may have been wrong or incomplete. Consider reverting and taking a different approach
     - Do NOT re-apply the same fix that didn't work last time. If the same error persists, you need a different approach
-    {{/if}}
+    [/IF]
 
     ## What NOT To Do
 
