@@ -51,6 +51,8 @@ digraph process {
     "Read plan, extract all tasks with full text, note context, create TodoWrite" [shape=box];
     "More tasks remain?" [shape=diamond];
     "Dispatch final code reviewer subagent for entire implementation" [shape=box];
+    "Feature includes frontend work?" [shape=diamond];
+    "Invoke supernova:frontend-smoke-testing" [shape=box style=filled fillcolor=lightyellow];
     "Use supernova:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
 
     "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
@@ -70,7 +72,10 @@ digraph process {
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
-    "Dispatch final code reviewer subagent for entire implementation" -> "Use supernova:finishing-a-development-branch";
+    "Dispatch final code reviewer subagent for entire implementation" -> "Feature includes frontend work?";
+    "Feature includes frontend work?" -> "Invoke supernova:frontend-smoke-testing" [label="yes"];
+    "Feature includes frontend work?" -> "Use supernova:finishing-a-development-branch" [label="no"];
+    "Invoke supernova:frontend-smoke-testing" -> "Use supernova:finishing-a-development-branch";
 }
 ```
 
@@ -118,7 +123,7 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 ```
 You: I'm using Subagent-Driven Development to execute this plan.
 
-[Read plan file once: docs/plans/feature-plan.md]
+[Read plan file once: docs/supernova/<feature>/plan.md]
 [Extract all 5 tasks with full text and context]
 [Create TodoWrite with all tasks]
 
@@ -154,6 +159,17 @@ Final reviewer: All requirements met, ready to merge
 
 Done!
 ```
+
+## Frontend Smoke Testing
+
+After the final code review, check if the feature includes frontend/UI work. If yes:
+
+- **REQUIRED SUB-SKILL:** Use supernova:frontend-smoke-testing
+- This runs BEFORE finishing-a-development-branch
+- The smoke testing skill handles the full loop (write plan, start server, test, fix, retry)
+- If smoke tests pass or the skill determines testing isn't feasible: proceed to finish
+- If smoke tests fail after 3 attempts: the skill will escalate to the user
+- **If bugfix agent made code changes:** dispatch a code quality review scoped to the bugfix commits (with spec + plan as context) before proceeding to finish. Skip this review if smoke tests passed on the first try (no fixes needed). No need to re-run smoke tests after the review.
 
 ## Red Flags
 
@@ -193,6 +209,9 @@ Done!
 - **supernova:writing-plans** - Creates the plan this skill executes
 - **supernova:requesting-code-review** - Code review template for reviewer subagents
 - **supernova:finishing-a-development-branch** - Complete development after all tasks
+
+**After implementation:**
+- **supernova:frontend-smoke-testing** - Smoke test frontend after all tasks (if applicable)
 
 **Subagents should use:**
 - **supernova:test-driven-development** - Subagents follow TDD for each task
