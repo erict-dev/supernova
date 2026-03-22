@@ -1,0 +1,18 @@
+{
+  "name": "supernova",
+  "description": "Opinionated development workflow for Claude Code: brainstorm → design doc → implementation plan → execute with subagents → review → Playwright E2E testing → ship",
+  "version": "1.0.0",
+  "author": { "name": "Eric" },
+  "homepage": "https://github.com/erict-dev/supernova",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "brainstorming",
+    "implementation",
+    "testing",
+    "playwright",
+    "code-review",
+    "subagents",
+    "autonomous"
+  ]
+}

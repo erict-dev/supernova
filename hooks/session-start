@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# SessionStart hook for supernova plugin
+
+set -euo pipefail
+
+# Determine plugin root directory
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Read using-supernova content
+using_supernova_content=$(cat "${PLUGIN_ROOT}/skills/using-supernova/SKILL.md" 2>&1 || echo "Error reading using-supernova skill")
+
+# Escape string for JSON embedding using bash parameter substitution.
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+using_supernova_escaped=$(escape_for_json "$using_supernova_content")
+session_context="<EXTREMELY_IMPORTANT>\nYou have supernova skills.\n\n**Below is the full content of your 'supernova:using-supernova' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_supernova_escaped}\n\n</EXTREMELY_IMPORTANT>"
+
+# Output context injection as JSON for Claude Code.
+# Uses printf instead of heredoc to work around a bash 5.3+ bug where
+# heredoc variable expansion hangs when content exceeds ~512 bytes.
+printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
+
+exit 0

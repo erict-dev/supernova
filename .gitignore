@@ -1,0 +1,7 @@
+# Reference repos (research material, not part of plugin)
+superpowers/
+everything-claude-code/
+gstack/
+
+node_modules/
+.DS_Store
