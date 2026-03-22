@@ -110,6 +110,17 @@ git commit -m "feat: add specific feature"
 - Reference relevant skills by name
 - DRY, YAGNI, TDD, frequent commits
 
+## External API/Library Verification
+
+If the plan includes calls to external APIs, services, or libraries, verify usage against official documentation before moving to the review loop. For each external dependency:
+
+1. Look up the official docs (use context7, web search, or other available tools)
+2. Confirm endpoint URLs, method signatures, parameter names, and return types match current docs
+3. Check for deprecated methods or breaking changes in recent versions
+4. Fix any incorrect usage in the plan's code snippets
+
+This prevents building an entire implementation on wrong API assumptions.
+
 ## Plan Review Loop
 
 After writing the complete plan:
@@ -124,9 +135,19 @@ After writing the complete plan:
 - If loop exceeds 3 iterations, surface to human for guidance
 - Reviewers are advisory — explain disagreements if you believe feedback is incorrect
 
+## User Review Gate
+
+After the plan review loop passes, present the plan and wait for the user before moving on:
+
+> "Plan complete and saved to `docs/plans/<filename>.md`. Please review it and let me know if you want to make any changes before I start implementation."
+
+Wait for the user's response. If they request changes, make them and re-run the plan review loop. Only proceed to execution once the user approves.
+
+**Skip if autonomous:** If the user has said "take it from here" (or similar) earlier in the conversation, skip this gate and proceed directly to execution.
+
 ## Execution Handoff
 
-After saving the plan:
+After user approval (or autonomous mode):
 
 **"Plan complete and saved to `docs/plans/<filename>.md`. Proceeding with subagent-driven execution."**
 

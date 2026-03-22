@@ -115,11 +115,13 @@ After writing the spec document:
 3. If loop exceeds 3 iterations, surface to human for guidance
 
 **User Review Gate:**
-After the spec review loop passes, ask the user to review the written spec before proceeding:
+After the spec review loop passes, present the spec and wait for the user before moving on:
 
-> "Spec written and committed to `<path>`. Please review it and let me know if you want to make any changes before we start writing out the implementation plan."
+> "Spec written and committed to `<path>`. Please review it and let me know if you want to make any changes before we move on to the implementation plan."
 
-Wait for the user's response. If they request changes, make them and re-run the spec review loop. Only proceed once the user approves.
+Wait for the user's response. If they request changes, make them and re-run the spec review loop. Only proceed to writing-plans once the user approves.
+
+**Skip if autonomous:** If the user has said "take it from here" (or similar) earlier in the conversation, skip this gate and proceed directly to writing-plans.
 
 ## Key Principles
 
