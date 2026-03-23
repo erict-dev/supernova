@@ -72,7 +72,7 @@ Task tool (general-purpose):
 
     ### Injection
     Test all discovered form fields, URL parameters, and API inputs with:
-    - **SQLi:** `' OR 1=1--`, `" OR 1=1--`, `1; DROP TABLE test--` (detection only — do not execute destructive queries)
+    - **SQLi:** `' OR 1=1--`, `" OR 1=1--`, `' UNION SELECT NULL--`, `1 AND 1=1`
     - **XSS:** `<script>alert(1)</script>`, `"><img src=x onerror=alert(1)>`, `javascript:alert(1)`
     - **SSTI:** `{{7*7}}`, `${7*7}`, `<%= 7*7 %>`
     - **Command injection:** `; ls`, `| id`, `` `whoami` ``
