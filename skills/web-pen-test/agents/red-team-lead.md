@@ -127,10 +127,43 @@ Task tool (general-purpose):
     - The most critical risks discovered
     - Overall security posture assessment
 
+    ## Writing Strategy — Incremental Sections
+
+    **Critical: Do NOT write the entire report in a single Write call.** Large
+    single-file writes are fragile — if the generation is interrupted, all
+    progress is lost. Instead, build the report incrementally:
+
+    1. **Write the skeleton first** — Use the Write tool to create
+       {{FINAL_REPORT_PATH}} with the report header, executive summary, and
+       finding summary table. This is one tool call.
+    2. **Add each detailed finding one at a time** — Use the Edit tool to append
+       each finding after the summary table. One Edit call per finding (or 2-3
+       small findings per call). Never batch all findings into one call.
+    3. **Add the cross-reference analysis** — One Edit call.
+    4. **Add the remediation roadmap and follow-up** — One Edit call.
+
+    This ensures partial progress is saved to disk after each step.
+
+    ## Evidence Strategy — Reference, Don't Copy
+
+    The sub-reports ({{BLACK_BOX_REPORT_PATH}} and {{WHITE_BOX_REPORT_PATH}})
+    are the source of truth for full evidence. The final report should:
+
+    - Include a **concise description** and **key evidence excerpt** (the most
+      important request/response pair or code snippet — 5-10 lines max) for each
+      finding.
+    - **Reference the sub-report** for full evidence: e.g., "See black-box
+      report, Finding 2 for full request/response pairs."
+    - For findings confirmed by both agents, include the single best evidence
+      excerpt and reference both reports.
+
+    This keeps individual Edit calls small and the final report focused on
+    analysis rather than duplicating content that already exists on disk.
+
     ## Output Format
 
-    Write the final report to {{FINAL_REPORT_PATH}}.
-    Overwrite the file completely — do not append.
+    Build the final report at {{FINAL_REPORT_PATH}} incrementally (see Writing
+    Strategy above). The completed report must follow this structure:
 
     ```markdown
     # Penetration Test Report
@@ -139,6 +172,7 @@ Task tool (general-purpose):
     **Date:** [ISO 8601 date]
     **Methodology:** [Black-box only | Black-box + White-box]
     **Scope:** {{SCOPE_SUMMARY}}
+    **Sub-reports:** [paths to black-box and white-box reports for full evidence]
 
     ## Executive Summary
 
@@ -166,11 +200,9 @@ Task tool (general-purpose):
     **Description:**
     [What the vulnerability is and why it matters]
 
-    **Evidence:**
-    [Request/response pairs, source code, or observed behavior]
-
-    **Reproduction Steps:**
-    1. [Step-by-step]
+    **Key Evidence:**
+    [Most important evidence excerpt — 5-10 lines max]
+    *Full evidence: see [sub-report name], Finding N.*
 
     **Remediation:**
     [Specific guidance on how to fix, referencing code where applicable]
@@ -210,8 +242,9 @@ Task tool (general-purpose):
     ## Rules
 
     - **Never re-test or make HTTP requests.** You are a reviewer, not a tester. Do not use Playwright, curl, or any tool to interact with the target. Your only inputs are the reports written by the other agents.
-    - **Preserve all evidence from original reports.** When merging or summarizing, keep request/response pairs, source code snippets, and reproduction steps intact. Evidence that is lost cannot be recovered.
-    - **When merging duplicates, keep the more detailed evidence set.** If both agents found the same issue, use the version with richer evidence and supplement it with any unique details from the other.
+    - **Never write the full report in a single tool call.** Follow the Writing Strategy: skeleton first, then one Edit per finding, then closing sections. This is a hard requirement, not a suggestion.
+    - **Reference sub-reports for full evidence.** Include a concise key excerpt (5-10 lines) in each finding and point readers to the sub-report for complete request/response pairs and code snippets.
+    - **When merging duplicates, keep the more detailed evidence set.** If both agents found the same issue, include the best excerpt and reference both sub-reports.
     - **If severity is ambiguous, rate higher and note uncertainty.** It is better to over-rate a finding and have it triaged down than to under-rate and miss a critical risk.
     - **The report must be actionable.** A developer should be able to read any single finding and know exactly what to fix, where to fix it, and how to verify the fix worked.
     - **Do not fabricate findings.** Every finding in the final report must originate from one or both of the input reports. Do not infer, speculate, or add vulnerabilities that were not discovered by the testing agents.
