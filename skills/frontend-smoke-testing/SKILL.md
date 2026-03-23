@@ -167,11 +167,8 @@ Report results to the user:
 ## Integration
 
 **Called by:**
-- **supernova:subagent-driven-development** — After all tasks complete and final code review passes, before finishing-a-development-branch
+- **supernova:subagent-driven-development** — After all tasks complete and final code review passes
 
 **Uses:**
 - **supernova:systematic-debugging** — Escalation path when bugfix agent encounters issues it cannot resolve through straightforward fixes
 - **subagent-driven-development/code-quality-reviewer-prompt.md** — For post-fix code review of bugfix commits
-
-**Followed by:**
-- **supernova:finishing-a-development-branch** — After smoke tests pass (or are explicitly skipped)

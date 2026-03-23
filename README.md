@@ -8,7 +8,7 @@ Supernova gives Claude Code a structured workflow for building software:
 
 **brainstorm** → **write plan** → **execute with subagents** → **review** → **finish**
 
-It ships 13 skills that enforce discipline at each stage:
+It ships 12 skills that enforce discipline at each stage:
 
 | Skill | Purpose |
 |-------|---------|
@@ -23,7 +23,6 @@ It ships 13 skills that enforce discipline at each stage:
 | **dispatching-parallel-agents** | Concurrent multi-domain investigation |
 | **verification-before-completion** | Evidence-before-claims enforcement |
 | **using-git-worktrees** | Isolated workspace creation |
-| **finishing-a-development-branch** | Merge/PR/keep/discard workflow |
 | **writing-skills** | TDD applied to writing new skills |
 
 ## What changed from superpowers

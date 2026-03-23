@@ -53,7 +53,7 @@ digraph process {
     "Dispatch final code reviewer subagent for entire implementation" [shape=box];
     "Feature includes frontend work?" [shape=diamond];
     "Invoke supernova:frontend-smoke-testing" [shape=box style=filled fillcolor=lightyellow];
-    "Use supernova:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
+    "Done" [shape=box style=filled fillcolor=lightgreen];
 
     "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
     "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent asks questions?";
@@ -74,8 +74,8 @@ digraph process {
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
     "Dispatch final code reviewer subagent for entire implementation" -> "Feature includes frontend work?";
     "Feature includes frontend work?" -> "Invoke supernova:frontend-smoke-testing" [label="yes"];
-    "Feature includes frontend work?" -> "Use supernova:finishing-a-development-branch" [label="no"];
-    "Invoke supernova:frontend-smoke-testing" -> "Use supernova:finishing-a-development-branch";
+    "Feature includes frontend work?" -> "Done" [label="no"];
+    "Invoke supernova:frontend-smoke-testing" -> "Done";
 }
 ```
 
@@ -165,7 +165,6 @@ Done!
 After the final code review, check if the feature includes frontend/UI work. If yes:
 
 - **REQUIRED SUB-SKILL:** Use supernova:frontend-smoke-testing
-- This runs BEFORE finishing-a-development-branch
 - The smoke testing skill handles the full loop (write plan, start server, test, fix, retry)
 - If smoke tests pass or the skill determines testing isn't feasible: proceed to finish
 - If smoke tests fail after 3 attempts: the skill will escalate to the user
@@ -208,7 +207,6 @@ After the final code review, check if the feature includes frontend/UI work. If 
 - **supernova:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
 - **supernova:writing-plans** - Creates the plan this skill executes
 - **supernova:requesting-code-review** - Code review template for reviewer subagents
-- **supernova:finishing-a-development-branch** - Complete development after all tasks
 
 **After implementation:**
 - **supernova:frontend-smoke-testing** - Smoke test frontend after all tasks (if applicable)

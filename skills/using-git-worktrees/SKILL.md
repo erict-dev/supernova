@@ -182,5 +182,3 @@ Ready to implement <feature-name>
 - **subagent-driven-development** - REQUIRED before executing any tasks
 - Any skill needing isolated workspace
 
-**Pairs with:**
-- **finishing-a-development-branch** - REQUIRED for cleanup after work complete
