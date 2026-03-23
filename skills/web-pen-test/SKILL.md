@@ -127,18 +127,42 @@ Validate reachability. Gather initial headers (server, framework hints, security
 
 ### 2. Dispatch Agents
 
-**If source code provided:** dispatch black-box and white-box agents in parallel using `supernova:dispatching-parallel-agents`.
+Read each agent template and substitute template variables before dispatching. Use `supernova:dispatching-parallel-agents` for parallel dispatch.
 
-- Black-box recon agent (`./agents/black-box-recon.md`): receives target URL, auth (if provided), scope, RoE
-- White-box auditor (`./agents/white-box-auditor.md`): receives target URL, source code path, auth (if provided or discovered), scope, RoE
+**Black-box recon** (`./agents/black-box-recon.md`):
 
-**If no source code:** dispatch black-box agent only.
+| Variable | Value |
+|----------|-------|
+| `{{TARGET_URL}}` | URL from Q1 |
+| `{{AUTH_CREDENTIALS}}` | Credentials from Q3, or "None — unauthenticated testing only" |
+| `{{SCOPE_BOUNDARIES}}` | Scope from Q4, or "Full application, no exclusions" |
+| `{{REPORT_OUTPUT_PATH}}` | `docs/supernova/[DATE]-pen-test-report-[domain]-[HH-MM]-black-box.md` |
+| `{{ROE_DEFAULTS}}` | The Rules of Engagement Defaults section above |
+
+**White-box auditor** (`./agents/white-box-auditor.md`) — skip if no source code:
+
+| Variable | Value |
+|----------|-------|
+| `{{TARGET_URL}}` | URL from Q1 |
+| `{{SOURCE_CODE_PATH}}` | Path from Q2 |
+| `{{AUTH_CREDENTIALS}}` | Credentials from Q3, or "None — discover from source code" |
+| `{{SCOPE_BOUNDARIES}}` | Scope from Q4, or "Full application, no exclusions" |
+| `{{REPORT_OUTPUT_PATH}}` | `docs/supernova/[DATE]-pen-test-report-[domain]-[HH-MM]-white-box.md` |
+| `{{ROE_DEFAULTS}}` | The Rules of Engagement Defaults section above |
 
 **Critical:** black-box agent prompt must NOT contain any information from source code analysis. The two agents are information-siloed.
 
 ### 3. Synthesis
 
-After agent(s) complete: dispatch red team lead (`./agents/red-team-lead.md`) with both reports (or single report if black-box only).
+After agent(s) complete, dispatch red team lead (`./agents/red-team-lead.md`):
+
+| Variable | Value |
+|----------|-------|
+| `{{BLACK_BOX_REPORT_PATH}}` | Path to black-box findings file |
+| `{{WHITE_BOX_REPORT_PATH}}` | Path to white-box findings file, or "N/A — black-box only run" |
+| `{{TARGET_URL}}` | URL from Q1 |
+| `{{SCOPE_SUMMARY}}` | Scope from Q4 + the Rules of Engagement Defaults section |
+| `{{FINAL_REPORT_PATH}}` | `docs/supernova/[DATE]-pen-test-report-[domain]-[HH-MM].md` |
 
 ### 4. Report
 
