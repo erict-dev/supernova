@@ -25,7 +25,7 @@ You MUST create a task for each of these items and complete them in order:
 2. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
 3. **Propose 2-3 approaches** — with trade-offs and your recommendation
 4. **Present design** — in sections scaled to their complexity, get user approval after each section
-5. **Write design doc** — save to `docs/supernova/YYYY-MM-DD-<topic>/design.md` and commit
+5. **Write design doc** — save to `plans/supernova/YYYY-MM-DD-<topic>/design.md` and commit
 6. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch until approved (max 3 iterations, then surface to human)
 7. **User reviews written spec** — ask user to review the spec file before proceeding
 8. **Transition to implementation** — invoke writing-plans skill to create implementation plan
@@ -103,7 +103,7 @@ digraph brainstorming {
 
 **Documentation:**
 
-- Write the validated design (spec) to `docs/supernova/YYYY-MM-DD-<topic>/design.md`
+- Write the validated design (spec) to `plans/supernova/YYYY-MM-DD-<topic>/design.md`
   - (User preferences for spec location override this default)
 - Commit the design document to git
 

@@ -88,7 +88,7 @@ Analyze what was built by reading the spec, plan, and implementation code. Write
 
 **b. Requires manual testing** — Scenarios needing production environment, third-party services, special config, or complex harnessing. Include WHY each cannot be tested locally.
 
-Save to: `docs/supernova/<feature-folder>/smoke-tests.md`
+Save to: `plans/supernova/<feature-folder>/smoke-tests.md`
 
 **Never skip this step.** Writing the plan forces you to think about what "working" means before touching the browser.
 
@@ -111,7 +111,7 @@ Start the server and wait for it to be ready:
 **a. Dispatch fresh smoke test agent** (`./smoke-test-agent.md`)
 - Input: path to `smoke-tests.md`
 - Agent uses Playwright to walk through all "Testable locally" scenarios
-- Agent writes results to `docs/supernova/<feature-folder>/smoke-test-results.md` (overwritten each run — always reflects current state)
+- Agent writes results to `plans/supernova/<feature-folder>/smoke-test-results.md` (overwritten each run — always reflects current state)
 - Agent returns: **PASS** or **FAIL**
 
 **b. If PASS:** Break loop, proceed to Step 4.

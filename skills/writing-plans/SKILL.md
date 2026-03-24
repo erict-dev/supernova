@@ -15,7 +15,7 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Context:** This should be run in a dedicated worktree.
 
-**Save plans to:** `docs/supernova/YYYY-MM-DD-<feature-name>/plan.md`
+**Save plans to:** `plans/supernova/YYYY-MM-DD-<feature-name>/plan.md`
 - (User preferences for plan location override this default)
 
 ## Scope Check
@@ -139,7 +139,7 @@ After writing the complete plan:
 
 After the plan review loop passes, present the plan and wait for the user before moving on:
 
-> "Plan complete and saved to `docs/supernova/<feature-folder>/plan.md`. Please review it and let me know if you want to make any changes before I start implementation."
+> "Plan complete and saved to `plans/supernova/<feature-folder>/plan.md`. Please review it and let me know if you want to make any changes before I start implementation."
 
 Wait for the user's response. If they request changes, make them and re-run the plan review loop. Only proceed to execution once the user approves.
 
@@ -149,7 +149,7 @@ Wait for the user's response. If they request changes, make them and re-run the 
 
 After user approval (or autonomous mode):
 
-**"Plan complete and saved to `docs/supernova/<feature-folder>/plan.md`. Proceeding with subagent-driven execution."**
+**"Plan complete and saved to `plans/supernova/<feature-folder>/plan.md`. Proceeding with subagent-driven execution."**
 
 - **REQUIRED SUB-SKILL:** Use supernova:subagent-driven-development
 - Fresh subagent per task + two-stage review

@@ -136,7 +136,7 @@ Read each agent template and substitute template variables before dispatching. U
 | `{{TARGET_URL}}` | URL from Q1 |
 | `{{AUTH_CREDENTIALS}}` | Credentials from Q3, or "None — unauthenticated testing only" |
 | `{{SCOPE_BOUNDARIES}}` | Scope from Q4, or "Full application, no exclusions" |
-| `{{REPORT_OUTPUT_PATH}}` | `docs/supernova/[DATE]-pen-test-report-[domain]-[HH-MM]-black-box.md` |
+| `{{REPORT_OUTPUT_PATH}}` | `plans/supernova/[DATE]-pen-test-report-[domain]-[HH-MM]-black-box.md` |
 | `{{ROE_DEFAULTS}}` | The Rules of Engagement Defaults section above |
 
 **White-box auditor** (`./agents/white-box-auditor.md`) — skip if no source code:
@@ -147,7 +147,7 @@ Read each agent template and substitute template variables before dispatching. U
 | `{{SOURCE_CODE_PATH}}` | Path from Q2 |
 | `{{AUTH_CREDENTIALS}}` | Credentials from Q3, or "None — discover from source code" |
 | `{{SCOPE_BOUNDARIES}}` | Scope from Q4, or "Full application, no exclusions" |
-| `{{REPORT_OUTPUT_PATH}}` | `docs/supernova/[DATE]-pen-test-report-[domain]-[HH-MM]-white-box.md` |
+| `{{REPORT_OUTPUT_PATH}}` | `plans/supernova/[DATE]-pen-test-report-[domain]-[HH-MM]-white-box.md` |
 | `{{ROE_DEFAULTS}}` | The Rules of Engagement Defaults section above |
 
 **Critical:** black-box agent prompt must NOT contain any information from source code analysis. The two agents are information-siloed.
@@ -162,11 +162,11 @@ After agent(s) complete, dispatch red team lead (`./agents/red-team-lead.md`):
 | `{{WHITE_BOX_REPORT_PATH}}` | Path to white-box findings file, or "N/A — black-box only run" |
 | `{{TARGET_URL}}` | URL from Q1 |
 | `{{SCOPE_SUMMARY}}` | Scope from Q4 + the Rules of Engagement Defaults section |
-| `{{FINAL_REPORT_PATH}}` | `docs/supernova/[DATE]-pen-test-report-[domain]-[HH-MM].md` |
+| `{{FINAL_REPORT_PATH}}` | `plans/supernova/[DATE]-pen-test-report-[domain]-[HH-MM].md` |
 
 ### 4. Report
 
-Write final report to: `docs/supernova/[DATE]-pen-test-report-[target-domain]-[HH-MM].md`
+Write final report to: `plans/supernova/[DATE]-pen-test-report-[target-domain]-[HH-MM].md`
 
 Present executive summary to user with path to full report.
 
