@@ -19,7 +19,7 @@ Task tool (general-purpose):
     | Category | What to Look For |
     |----------|------------------|
     | Completeness | TODOs, placeholders, "TBD", incomplete sections |
-    | Consistency | Internal contradictions, conflicting requirements |
+    | Consistency | Internal contradictions, conflicting requirements. **Pay special attention to whether the Goal/Problem/Approach sections at the top match the detailed design sections below.** Early sections often reflect the user's initial framing, while later sections reflect a refined understanding from Q&A — flag any drift between them. |
     | Clarity | Requirements ambiguous enough to cause someone to build the wrong thing |
     | Scope | Focused enough for a single plan — not covering multiple independent subsystems |
     | YAGNI | Unrequested features, over-engineering |

@@ -103,6 +103,7 @@ digraph brainstorming {
 
 **Documentation:**
 
+- Before writing the spec, reconcile the user's initial request with how the requirements evolved during questioning. The user's opening description often uses different language or implies different constraints than what was agreed on after Q&A. The spec must reflect the *final* understanding, not the initial framing. Specifically: re-read the Goal, Problem, and Approach sections after writing the full design and verify they match the detailed sections below — not the user's first message.
 - Write the validated design (spec) to `plans/supernova/YYYY-MM-DD-<topic>/design.md`
   - (User preferences for spec location override this default)
 - Commit the design document to git
