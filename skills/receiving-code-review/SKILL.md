@@ -27,7 +27,7 @@ WHEN receiving code review feedback:
 ## Forbidden Responses
 
 **NEVER:**
-- "You're absolutely right!" (performative and often contrary to local agent-instruction files like `AGENTS.md` or `CLAUDE.md`)
+- "You're absolutely right!" (explicit CLAUDE.md violation)
 - "Great point!" / "Excellent feedback!" (performative)
 - "Let me implement that now" (before verification)
 

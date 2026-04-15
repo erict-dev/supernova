@@ -66,10 +66,10 @@ Each agent gets:
 ### 3. Dispatch in Parallel
 
 ```typescript
-// Use your runtime's parallel delegation API
-dispatch("Fix agent-tool-abort.test.ts failures")
-dispatch("Fix batch-completion-behavior.test.ts failures")
-dispatch("Fix tool-approval-race-conditions.test.ts failures")
+// In Claude Code / AI environment
+Task("Fix agent-tool-abort.test.ts failures")
+Task("Fix batch-completion-behavior.test.ts failures")
+Task("Fix tool-approval-race-conditions.test.ts failures")
 // All three run concurrently
 ```
 
@@ -157,3 +157,4 @@ After agents return:
 2. **Check for conflicts** - Did agents edit same code?
 3. **Run full suite** - Verify all fixes work together
 4. **Spot check** - Agents can make systematic errors
+

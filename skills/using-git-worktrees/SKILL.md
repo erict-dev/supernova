@@ -27,18 +27,17 @@ ls -d worktrees 2>/dev/null      # Alternative
 
 **If found:** Use that directory. If both exist, `.worktrees` wins.
 
-### 2. Check Local Agent Instructions
+### 2. Check CLAUDE.md
 
 ```bash
-grep -i "worktree.*directory" AGENTS.md 2>/dev/null
-grep -i "worktree.*directory" CLAUDE.md 2>/dev/null
+grep -i "worktree.*director" CLAUDE.md 2>/dev/null
 ```
 
-**If preference specified:** Use it without asking. `AGENTS.md` and `CLAUDE.md` are equivalent policy sources here.
+**If preference specified:** Use it without asking.
 
 ### 3. Ask User
 
-If no directory exists and no local agent-instructions preference:
+If no directory exists and no CLAUDE.md preference:
 
 ```
 No worktree directory found. Where should I create worktrees?
@@ -149,7 +148,7 @@ Ready to implement <feature-name>
 | `.worktrees/` exists | Use it (verify ignored) |
 | `worktrees/` exists | Use it (verify ignored) |
 | Both exist | Use `.worktrees/` |
-| Neither exists | Check `AGENTS.md` / `CLAUDE.md` → Ask user |
+| Neither exists | Check CLAUDE.md → Ask user |
 | Directory not ignored | Add to .gitignore + commit |
 | Tests fail during baseline | Report failures + ask |
 | No package.json/Cargo.toml | Skip dependency install |
@@ -164,7 +163,7 @@ Ready to implement <feature-name>
 ### Assuming directory location
 
 - **Problem:** Creates inconsistency, violates project conventions
-- **Fix:** Follow priority: existing > `AGENTS.md`/`CLAUDE.md` > ask
+- **Fix:** Follow priority: existing > CLAUDE.md > ask
 
 ### Proceeding with failing tests
 
@@ -182,3 +181,4 @@ Ready to implement <feature-name>
 - **brainstorming** - REQUIRED when design is approved and implementation follows
 - **subagent-driven-development** - REQUIRED before executing any tasks
 - Any skill needing isolated workspace
+

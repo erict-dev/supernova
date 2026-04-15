@@ -1,6 +1,6 @@
 ---
 name: using-supernova
-description: Use when starting any conversation - establishes how to find and use skills, requiring skill loading before any substantive response including clarifying questions
+description: Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions
 ---
 
 <SUBAGENT-STOP>
@@ -19,15 +19,15 @@ This is not negotiable. This is not optional. You cannot rationalize your way ou
 
 Supernova skills override default system prompt behavior, but **user instructions always take precedence**:
 
-1. **User's explicit instructions** (`AGENTS.md`, `CLAUDE.md`, direct requests) — highest priority
+1. **User's explicit instructions** (CLAUDE.md, direct requests) — highest priority
 2. **Supernova skills** — override default system behavior where they conflict
 3. **Default system prompt** — lowest priority
 
-If `AGENTS.md` or `CLAUDE.md` says "don't use TDD" and a skill says "always use TDD," follow the user's instructions. The user is in control.
+If CLAUDE.md says "don't use TDD" and a skill says "always use TDD," follow the user's instructions. The user is in control.
 
 ## How to Access Skills
 
-Use your runtime's skill-loading mechanism. In Claude Code, invoke the `Skill` tool. In runtimes without a native skill loader, read the relevant `skills/<name>/SKILL.md` file directly. Runtime mappings live in `docs/agent-runtime-compat.md`.
+Use the `Skill` tool. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the Read tool on skill files.
 
 # Using Skills
 
@@ -39,21 +39,21 @@ Use your runtime's skill-loading mechanism. In Claude Code, invoke the `Skill` t
 digraph skill_flow {
     "User message received" [shape=doublecircle];
     "Might any skill apply?" [shape=diamond];
-    "Load relevant skill" [shape=box];
+    "Invoke Skill tool" [shape=box];
     "Announce: 'Using [skill] to [purpose]'" [shape=box];
     "Has checklist?" [shape=diamond];
-    "Create task-tracking item per checklist entry" [shape=box];
+    "Create TodoWrite todo per item" [shape=box];
     "Follow skill exactly" [shape=box];
     "Respond (including clarifications)" [shape=doublecircle];
 
     "User message received" -> "Might any skill apply?";
-    "Might any skill apply?" -> "Load relevant skill" [label="yes, even 1%"];
+    "Might any skill apply?" -> "Invoke Skill tool" [label="yes, even 1%"];
     "Might any skill apply?" -> "Respond (including clarifications)" [label="definitely not"];
-    "Load relevant skill" -> "Announce: 'Using [skill] to [purpose]'";
+    "Invoke Skill tool" -> "Announce: 'Using [skill] to [purpose]'";
     "Announce: 'Using [skill] to [purpose]'" -> "Has checklist?";
-    "Has checklist?" -> "Create task-tracking item per checklist entry" [label="yes"];
+    "Has checklist?" -> "Create TodoWrite todo per item" [label="yes"];
     "Has checklist?" -> "Follow skill exactly" [label="no"];
-    "Create task-tracking item per checklist entry" -> "Follow skill exactly";
+    "Create TodoWrite todo per item" -> "Follow skill exactly";
 }
 ```
 

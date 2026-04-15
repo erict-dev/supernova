@@ -5,8 +5,6 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 
 # Writing Plans
 
-Runtime note: when this skill says to dispatch a reviewer or sub-skill, use your runtime's skill/delegation mechanism. In Codex-style runtimes without a native skill tool, read the referenced `SKILL.md` directly and preserve the same review gates.
-
 ## Overview
 
 Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
@@ -151,9 +149,7 @@ Wait for the user's response. If they request changes, make them and re-run the 
 
 After user approval (or autonomous mode):
 
-**Commit the plan before starting implementation.** The plan file must be committed to the working branch so it's preserved in git history alongside the implementation. This prevents plan files from being lost when worktrees are cleaned up.
-
-**"Plan committed and saved to `plans/supernova/<feature-folder>/plan.md`. Proceeding with subagent-driven execution."**
+**"Plan complete and saved to `plans/supernova/<feature-folder>/plan.md`. Proceeding with subagent-driven execution."**
 
 - **REQUIRED SUB-SKILL:** Use supernova:subagent-driven-development
 - Fresh subagent per task + two-stage review
