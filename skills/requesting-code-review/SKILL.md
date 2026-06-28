@@ -31,7 +31,7 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 **2. Dispatch code-reviewer subagent:**
 
-Dispatch a code-reviewer subagent using the template at `code-reviewer.md`
+Dispatch a code-reviewer subagent using the template at `code-reviewer.md`. Dispatch it with **model: opus** — reviewers need the most capable model.
 
 **Placeholders:**
 - `{WHAT_WAS_IMPLEMENTED}` - What you just built

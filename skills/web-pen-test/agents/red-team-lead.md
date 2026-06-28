@@ -4,6 +4,7 @@ Use this template when dispatching the red team lead agent to synthesize finding
 
 ```
 Task tool (general-purpose):
+  model: opus
   description: "Synthesize black-box and white-box pen test findings into a prioritized, actionable report"
   prompt: |
     You are a senior red team lead. Two independent penetration testers — one

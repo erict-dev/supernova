@@ -81,18 +81,18 @@ digraph process {
 
 ## Model Selection
 
-Use the least powerful model that can handle each role to conserve cost and increase speed.
+Dispatch **every** subagent — implementer, spec reviewer, code quality reviewer, and final reviewer — with **Opus**. Quality and correctness matter more than the cost or latency savings of a smaller model, and a uniform Opus fleet keeps review judgment as sharp as implementation.
 
-**Mechanical implementation tasks** (isolated functions, clear specs, 1-2 files): use a fast, cheap model. Most implementation tasks are mechanical when the plan is well-specified.
+When you dispatch via the Task tool, set the model explicitly:
 
-**Integration and judgment tasks** (multi-file coordination, pattern matching, debugging): use a standard model.
+```
+Task tool (general-purpose):
+  model: opus
+  description: ...
+  prompt: ...
+```
 
-**Architecture, design, and review tasks**: use the most capable available model.
-
-**Task complexity signals:**
-- Touches 1-2 files with a complete spec → cheap model
-- Touches multiple files with integration concerns → standard model
-- Requires design judgment or broad codebase understanding → most capable model
+**Never** downgrade to Sonnet or Haiku — not even for "mechanical" tasks that touch only 1-2 files. Use Opus for every role, every time.
 
 ## Handling Implementer Status
 
@@ -104,13 +104,12 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 
 **NEEDS_CONTEXT:** The implementer needs information that wasn't provided. Provide the missing context and re-dispatch.
 
-**BLOCKED:** The implementer cannot complete the task. Assess the blocker:
-1. If it's a context problem, provide more context and re-dispatch with the same model
-2. If the task requires more reasoning, re-dispatch with a more capable model
-3. If the task is too large, break it into smaller pieces
-4. If the plan itself is wrong, escalate to the human
+**BLOCKED:** The implementer cannot complete the task. Assess the blocker (all subagents stay on Opus — there is no more capable model to escalate to, so fix the inputs instead):
+1. If it's a context problem, provide the missing context and re-dispatch
+2. If the task is too large or needs more reasoning room, break it into smaller pieces
+3. If the plan itself is wrong, escalate to the human
 
-**Never** ignore an escalation or force the same model to retry without changes. If the implementer said it's stuck, something needs to change.
+**Never** ignore an escalation or force a blind retry without changes. If the implementer said it's stuck, something needs to change.
 
 ## Prompt Templates
 

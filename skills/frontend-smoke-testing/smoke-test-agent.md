@@ -4,6 +4,7 @@ Use this template when dispatching a smoke test agent to verify the frontend wor
 
 ```
 Task tool (general-purpose):
+  model: opus
   description: "Smoke test the running app against the test plan"
   prompt: |
     You are a smoke test agent. Your job is to open the running app in a browser,
