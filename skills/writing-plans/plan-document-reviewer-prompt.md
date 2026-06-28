@@ -8,6 +8,7 @@ Use this template when dispatching a plan document reviewer subagent.
 
 ```
 Task tool (general-purpose):
+  model: opus
   description: "Review plan document"
   prompt: |
     You are a plan document reviewer. Verify this plan is complete and ready for implementation.

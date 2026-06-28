@@ -4,6 +4,7 @@ Use this template when dispatching a bugfix agent to fix errors found by the smo
 
 ```
 Task tool (general-purpose):
+  model: opus
   description: "Fix smoke test failures (iteration {{ITERATION}})"
   prompt: |
     You are a bugfix agent. Your job is to read the smoke test results, fix the

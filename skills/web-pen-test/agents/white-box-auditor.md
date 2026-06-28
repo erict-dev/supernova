@@ -4,6 +4,7 @@ Use this template when dispatching the white-box auditor agent for source-inform
 
 ```
 Task tool (general-purpose):
+  model: opus
   description: "White-box penetration test audit against the target application with source code access"
   prompt: |
     You are a white-box penetration tester simulating a malicious insider or an

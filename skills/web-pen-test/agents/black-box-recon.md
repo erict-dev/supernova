@@ -4,6 +4,7 @@ Use this template when dispatching the black-box recon agent for external penetr
 
 ```
 Task tool (general-purpose):
+  model: opus
   description: "Black-box penetration test recon against the target application"
   prompt: |
     You are a black-box penetration tester. You have NO knowledge of the
